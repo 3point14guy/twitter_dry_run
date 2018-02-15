@@ -9,6 +9,10 @@ class EpicenterController < ApplicationController
   	end
   end
 
+  def tag_tweets
+    @tag = Tag.find(params[:id])
+  end
+
   def show_user
   	@user = User.find(params[:id])
   end
