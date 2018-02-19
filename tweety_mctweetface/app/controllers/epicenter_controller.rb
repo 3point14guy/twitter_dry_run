@@ -1,12 +1,20 @@
 class EpicenterController < ApplicationController
   def feed
-  	@following_tweets = []
+    if current_user != nil
+      @following_tweets = []
 
-  	Tweet.all.each do |tweet|
-  		if (current_user.following.include?(tweet.user_id) || current_user.id == tweet.user_id)
-  			@following_tweets.push(tweet)
-  		end
-  	end
+      Tweet.all.each do |tweet|
+        if (current_user.following.include?(tweet.user_id) || current_user.id == tweet.user_id)
+          @following_tweets.push(tweet)
+        end
+      end
+    else
+      redirect_to new_user_session_url
+    end
+  end
+
+  def all_users
+    @users = User.order(:username)
   end
 
   def tag_tweets
@@ -15,6 +23,28 @@ class EpicenterController < ApplicationController
 
   def show_user
   	@user = User.find(params[:id])
+  end
+
+  def following
+    @user = User.find(params[:id])
+    @users = []
+
+    User.all.each do |user|
+      if @user.following.include?(user.id)
+        @users.push(user)
+      end
+    end
+  end
+  
+  def followers
+    @user = User.find(params[:id])
+    @users = []
+
+    User.all.each do |user|
+      if user.following.include?(@user.id)
+        @users.push(user)
+      end
+    end
   end
 
   def now_following

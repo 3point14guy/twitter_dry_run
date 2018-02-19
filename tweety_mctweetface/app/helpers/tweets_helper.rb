@@ -1,6 +1,6 @@
 module TweetsHelper
     def get_tagged(tweet)
-        message_arr = Array.new
+     
         message_arr = tweet.message.split
         message_arr.each_with_index do |word, index|
             if word[0] == "#"

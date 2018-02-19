@@ -6,13 +6,17 @@
   <!-- a place for current user stats -->
   <div>
     <% @tag.tweets.order(created_at: :desc).each do |tweet| %>
+    <div class="well">
         <p> 
-	    <%= tweet.user.name %> <%= "@#{tweet.user.username}" %>
-	    • <%= time_ago_in_words(tweet.created_at) %>
+          <%= image_tag tweet.user.avatar, width: 50, class: "image_responsive"%>
+    	    <%= tweet.user.name %> <%= "@#{tweet.user.username}" %>
+    	    • <%= time_ago_in_words(tweet.created_at) %>
         </p>
-	<p>
-	    <%= tweet.message.html_safe %>
-	</p>
+
+      	<p>
+      	    <%= tweet.message.html_safe %>
+      	</p>
+    </div>
     <% end %>
    </div>
 </div>

@@ -1,11 +1,22 @@
 <h2>@<%= current_user.username %>'s Feed</h2>
+
+
 <h4>Here's what your friends are saying</h4>
 
 <div>
-	<% @following_tweets.each do |tweet| %>
-		<div class=’well’>
-			<p><%= link_to ('@' + tweet.user.username), show_user_path(id: tweet.user_id) %></p>
-			<p><%= tweet.message.html_safe %></p>
+	<% @following_tweets.reverse.each do |tweet| %>
+		<div class="well">
+			<p>
+				<%= image_tag tweet.user.avatar.url, width: "50", class: "image" %>
+				<%= link_to tweet.user.name, show_user_path(id: tweet.user.id) %>
+				<%= link_to ('@' + tweet.user.username), show_user_path(id: tweet.user_id) %>
+				&bull; 
+				<%= time_ago_in_words(tweet.created_at) if Time.now - tweet.created_at < 86400 %> 
+				<%= tweet.created_at.strftime('%b%e') if Time.now - tweet.created_at > 86400 %> 
+			</p>
+			<p>
+				<%= tweet.message.html_safe %>
+			</p>
 		</div>
 	<% end %>
 </div>
