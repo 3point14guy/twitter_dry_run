@@ -8,7 +8,7 @@
     <% @tag.tweets.order(created_at: :desc).each do |tweet| %>
     <div class="well">
         <p> 
-          <%= image_tag tweet.user.avatar, width: 50, class: "image_responsive"%>
+          <%= image_tag tweet.user.avatar, width: 50, class: "img_responsive"%>
     	    <%= tweet.user.name %> <%= "@#{tweet.user.username}" %>
     	    • <%= time_ago_in_words(tweet.created_at) %>
         </p>

@@ -7,7 +7,7 @@
 	<% @following_tweets.reverse.each do |tweet| %>
 		<div class="well">
 			<p>
-				<%= image_tag tweet.user.avatar.url, width: "50", class: "image" %>
+				<%= image_tag tweet.user.avatar.url, size: 50, class: "img-responsive" %>
 				<%= link_to tweet.user.name, show_user_path(id: tweet.user.id) %>
 				<%= link_to ('@' + tweet.user.username), show_user_path(id: tweet.user_id) %>
 				&bull; 
